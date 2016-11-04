@@ -2,11 +2,8 @@ extends layout
 
 block content
   .ui
-//*** make sure the indentation is correct 'for' otherwise it doesn't parse!!
-    for data in result //iterate through the results
+    for data in tripOption
       .ui_box
         .ui_box__inner
           .event
-            span #{data.event} // here pick out the jSON you require
-          .name
-            span #{data.name}
+            span #{data}
