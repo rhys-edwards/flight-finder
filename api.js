@@ -14,12 +14,12 @@ var apiCaller = function (cb) {
       },
       "slice": [
         {
-          "origin": "SFO",
-          "destination": "LAX",
-          "date": "2017-06-19"
+          "origin": "LHR",
+          "destination": "AMS",
+          "date": "2017-02-11"
         }
       ],
-      "solutions": "3"
+      "solutions": "5"
     }
   },
     json: true
@@ -27,7 +27,7 @@ var apiCaller = function (cb) {
 
   request(options)
     .then(function (response) {
-      //console.log(response.trips.tripOption[0])
+      //console.log(response.trips.tripOption)
       cb(response)
     })
     .catch(function (err) {

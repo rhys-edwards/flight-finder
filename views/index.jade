@@ -1,9 +1,10 @@
 extends layout
 
 block content
+  div
+    - console.dir(data.trips.tripOption)
+  div
   .ui
-    for data in tripOption
-      .ui_box
-        .ui_box__inner
-          .event
-            span #{data}
+    for obj in data.trips.tripOption
+      ul
+        span #{obj.saleTotal}
