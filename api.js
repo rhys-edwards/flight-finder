@@ -40,12 +40,7 @@ var apiGet = function(cb) {
   return apiCaller(cb);
 };
 
-var apiPost = function(post, cb) {
-  return apiCaller(cb);
-};
-
 // Export the functions for external access
 module.exports = {
-  apiGet: apiGet,
-  apiPost: apiPost
+  apiGet: apiGet
 };
