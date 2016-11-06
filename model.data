@@ -1,0 +1,10 @@
+UID
+  firstName
+  lastName
+  email
+  password
+  homeAirports
+    XXXXX
+  cities
+    city, dates
+  averageNights
