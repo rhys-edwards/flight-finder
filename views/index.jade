@@ -1,6 +1,22 @@
 extends layout
 
 block content
+  .container
+    h1 A Year of Travel
+    form(method='post', action='/signup', class='form')
+      .form-group
+        label First Name
+        input.form-control(name='firstName', required='required')
+      .form-group
+        label Last Name 
+        input.form-control(name='lastName', required='required')
+      .form-group
+        label Email
+        input.form-control(name='email', type='email', required='required')
+      input.btn.btn-default(name='submit', type='submit')
+  
+
+block content
   div
     - console.dir(data.trips.tripOption)
   div
