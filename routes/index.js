@@ -22,15 +22,17 @@ router.post('/signup', function(req, res, next) {
   let firstName = req.body.firstName
   let lastName = req.body.lastName
   let email = req.body.email
+  let homeAirport = req.body.homeAirport
 
   // This works
-  console.log(firstName, lastName, email)
+  console.log(firstName, lastName, email, homeAirport)
 
   // Create new User object for DB, fuck it. We're using mongo.
   var data = new User ({
     firstName: firstName,
     lastnName: lastName,
-    email:     email
+    email: email,
+    homeAirport: homeAirport
   })
 
   // Store the new User into the DB
