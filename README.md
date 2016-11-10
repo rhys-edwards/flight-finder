@@ -16,6 +16,7 @@ Trying to build the best itinerary-builder
 * Add new collection to user object for destinations
 * Return to the API (Or maybe do some front-end)
 
+
 ## Notes
 ~~User isn't defined as we haven't made the model schema and required it in index.js~~
 * We will still need to work out how to grab destinations and add them to the db
