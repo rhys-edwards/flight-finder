@@ -1,6 +1,7 @@
 // Import Mongoose and connect to the DB
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/users')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 // Establish connection to the DB
 const db = mongoose.connection
@@ -28,6 +29,8 @@ const UserSchema = mongoose.Schema ({
     index: true
   }
 })
+
+UserSchema.plugin(passportLocalMongoose)
 
 // Export it to the app
 let User = module.exports = mongoose.model('User', UserSchema)

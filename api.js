@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const $ = require('cheerio')
+//const $ = require('cheerio')
 const request = require('request-promise')
 
 var apiCaller = function (cb) {

@@ -7,6 +7,11 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// User setup
+const mongoose = require('mongoose')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+
 var app = express();
 
 
@@ -20,10 +25,26 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Sessions and Passport init
+app.use(require('express-session')({
+  secret: "keyboard cate",
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+// Configure passport
+let User = require('./models/user.model')
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

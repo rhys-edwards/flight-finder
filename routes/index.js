@@ -3,10 +3,11 @@ var router = express.Router()
 
 // All the things to store data
 const User = require('../models/user.model')
-const mongodb = required('mongodb')
+const mongodb = require('mongodb')
 const mongoose = require('mongoose')
 
 var api = require('../api')
+var user = require('../user')
 
 /* GET home page. */
 // We send all the data to the view
@@ -17,6 +18,14 @@ router.get('/', function(req, res, next) {
   api.apiGet(function (data) {
     res.render('index', {
       data: data
+    })
+  })
+})
+
+router.get('/home', function(req, res, next) {
+  user.userGet(function (user) {
+    res.render('home', {
+      user:user
     })
   })
 })
@@ -37,11 +46,13 @@ router.post('/signup', function(req, res, next) {
   // Create new User object for DB, fuck it. We're using mongo.
   var data = new User ({
     firstName: firstName,
-    lastnName: lastName,
+    lastName: lastName,
     email: email,
     password: password,
     homeAirport: homeAirport
   })
+
+  console.log(data)
 
   // Store the new User into the DB
   User.createUser(data, function(err, user) {

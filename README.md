@@ -7,14 +7,18 @@ Trying to build the best itinerary-builder
 ~~Add hometown to form~~
 ~~Add password to form~~
 * Download xcode cli tools (at home)
-* npm install mongoose & mongodb
+~~npm install mongoose & mongodb~~
 * Use Cities and Airports JSON data - search it
 ~~Create model schema~~
-* Check package json for missing dependancies
+~~Check package json for missing dependancies~~
 ~~Require Mongoose~~
 ~~Require mongo~~
 * Add new collection to user object for destinations
 * Return to the API (Or maybe do some front-end)
+* Get Mongo up and running
+* Get data into the DB
+* Return data to the client with a test
+
 
 
 ## Notes
