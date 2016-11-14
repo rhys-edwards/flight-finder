@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div
+    - console.dir(data.trips.tripOption)
+  div
+  .ui
+    for obj in data.trips.tripOption
+      ul
+        span #{obj.saleTotal}

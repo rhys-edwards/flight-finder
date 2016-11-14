@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .container
+    h1 Sign up
+    br
+    form(method='post', action='/register', class='form')
+      .form-group
+        label First Name
+        input.form-control(name='firstName', required='required')
+      .form-group
+        label Last Name 
+        input.form-control(name='lastName', required='required')
+      .form-group
+        label Email
+        input.form-control(name='email', type='email', required='required')
+      .form-group
+        label password
+        input.form-control(name='password', type='password', required='required')
+      .form-group
+        label Where will you fly from?
+        input.form-control(name='homeAirport', required='required')
+      input.btn.btn-default(name='submit', type='submit')

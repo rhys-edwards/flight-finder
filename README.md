@@ -15,9 +15,10 @@ Trying to build the best itinerary-builder
 ~~Require mongo~~
 * Add new collection to user object for destinations
 * Return to the API (Or maybe do some front-end)
-* Get Mongo up and running
-* Get data into the DB
+~~Get Mongo up and running~~
+~~Get data into the DB~~
 * Return data to the client with a test
+* Bad requests at the moment.. debug this
 
 
 

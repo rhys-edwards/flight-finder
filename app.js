@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+let UserSchema = require('./models/user.js')
 
 // User setup
 const mongoose = require('mongoose')
@@ -38,13 +38,11 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // Configure passport
-let User = require('./models/user.model')
-passport.use(new LocalStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
+passport.use(new LocalStrategy(UserSchema.authenticate()))
+passport.serializeUser(UserSchema.serializeUser())
+passport.deserializeUser(UserSchema.deserializeUser())
 
 
 // catch 404 and forward to error handler

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .container
+    h1 Login 
+    br
+    form(method="post", action="/login", class="form")
+      .form-group
+        input.form-control(type='text', name='email', required='required')
+      .form-group
+        input.form-control(type='password', name='password', required='required')
+      button.btn.btn-default(type='submit') submit
+      a(href='/')
+        button.btn.btn-default(type='button') Go back
