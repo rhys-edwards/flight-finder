@@ -24,7 +24,7 @@ router.get('/register', function(req, res) {
 })
 
 // Register a user to the DB
-router.post('/register', function(req, res){
+router.post('/register', function(req, res, next){
   let firstName = req.body.firstName
   let lastName = req.body.lastName
   let username = req.body.email
@@ -44,20 +44,25 @@ router.post('/register', function(req, res){
           user: user
         })
       }
+      // both of these works
+      passport.authenticate('local', { failureRedirect: '/' }),
+      function(req, res, next) {
+        res.redirect('/');
+      }
 
-      passport.authenticate('local')(req, res, function() {
-        req.session.save(function (err) {
-          if (err) {
-            return next(err)
-          }
-        res.redirect('/')
-      })
-    })
+      // passport.authenticate('local')(req, res, function() {
+      //   req.session.save(function (err) {
+      //     if (err) {
+      //       return next(err)
+      //     }
+      //   res.redirect('/')
+      //})
+    //})
   })
 })
 
 // Send to the login page
-router.get('/login', function(req, res) {
+router.get('/login', function(req, res, next) {
   res.render('login', {
     user: req.user
   })
@@ -69,25 +74,25 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 })
 
 // Logout the user
-router.get('/logout', function(req, res) {
+router.get('/logout', function(req, res, next) {
   req.logout()
   res.redirect('/')
 })
 
 // Test the connection
-router.get('/ping', function(req, res) {
+router.get('/ping', function(req, res, next) {
   res.status(200).send("pong")
 })
 
 // Hit the API
 // We need to work out how this will work with real data
-router.get('/', function(req, res, next) {
-  api.apiGet(function (data) {
-    res.render('index', {
-      data: data
-    })
-  })
-})
+// router.get('/', function(req, res, next) {
+//   api.apiGet(function (data) {
+//     res.render('index', {
+//       data: data
+//     })
+//   })
+// })
 
 // Create a new user
 // router.post('/signup', function(req, res, next) {

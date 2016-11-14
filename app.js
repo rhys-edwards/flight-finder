@@ -40,7 +40,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // Configure passport
-passport.use(new LocalStrategy(UserSchema.authenticate()))
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(username, password, done) {
+    UserSchema.authenticate()
+  }
+));
+
+//passport.use(new LocalStrategy(UserSchema.authenticate()))
 passport.serializeUser(UserSchema.serializeUser())
 passport.deserializeUser(UserSchema.deserializeUser())
 
