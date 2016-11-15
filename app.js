@@ -9,8 +9,8 @@ let UserSchema = require('./models/user.js')
 
 // User setup
 const mongoose = require('mongoose')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+var passport = require('passport')
+var LocalStrategy = require('passport-local').Strategy
 
 var app = express();
 
@@ -40,24 +40,65 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // Configure passport
+// passport.use(new LocalStrategy({
+//     email: 'email',
+//     password: 'password'
+//   },
+//   function(username, password, done) {
+//     //check if user is authenticated, in my case the user variable
+//     if (err) { return done(err); }
+//     if (!user) { return done(null, false); }
+//     if (!user.authenticate(password)) { return done(null, false); }
+//     if (!user.active) { return done(null, false); }
+//     return done(null, user);
+//   }
+// ));
+
+// passport.use(new LocalStrategy({
+//   usernameField: 'email',
+//   passwordField: 'password'
+// },
+//   function(username, password, done) {
+//     UserSchema.findOne({ username: username }, function(err, user) {
+//       if (err) { return done(err); }
+//       if (!user) {
+//         console.log('you fucked up the username')
+//         return done(null, false, { message: 'Incorrect username.' });
+//       }
+//       if (user.password != password) {
+//         console.log('you fucked up')
+//         return done(null, false, { message: 'Invalid password' });
+//       }
+//
+//       return done(null, user);
+//     });
+//   }
+// ));
+
 passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  function(username, password, done) {
-    //check if user is authenticated, in my case the user variable
-    if (err) { return done(err); }
-    if (!user) { return done(null, false); }
-    if (!user.authenticate(password)) { return done(null, false); }
-    if (!user.active) { return done(null, false); }
-    return done(null, user);
-  }
-));
+  usernameField: 'email',
+  passwordField: 'password'
+},
+  function(username, password, cb) {
+     UserSchema.findByUsername(username, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { return cb(null, false); }
+      if (user.password != password) { return cb(null, false); }
+      return cb(null, user);
+    });
+  }));
 
 //passport.use(new LocalStrategy(UserSchema.authenticate()))
-passport.serializeUser(UserSchema.serializeUser())
-passport.deserializeUser(UserSchema.deserializeUser())
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
 
+passport.deserializeUser(function(id, cb) {
+  UserSchema.findById(id, function (err, user) {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

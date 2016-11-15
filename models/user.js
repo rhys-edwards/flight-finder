@@ -32,6 +32,19 @@ const UserSchema = mongoose.Schema ({
 
 UserSchema.plugin(passportLocalMongoose)
 
+// Adding this function to find by username
+exports.findByUsername = function(username, cb) {
+  process.nextTick(function() {
+    for (var i = 0, len = records.length; i < len; i++) {
+      var record = records[i];
+      if (record.username === username) {
+        return cb(null, record);
+      }
+    }
+    return cb(null, null);
+  });
+}
+
 // Export it to the app
 module.exports = mongoose.model('user', UserSchema)
 
