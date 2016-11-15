@@ -45,7 +45,12 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function(username, password, done) {
-    UserSchema.authenticate()
+    //check if user is authenticated, in my case the user variable
+    if (err) { return done(err); }
+    if (!user) { return done(null, false); }
+    if (!user.authenticate(password)) { return done(null, false); }
+    if (!user.active) { return done(null, false); }
+    return done(null, user);
   }
 ));
 

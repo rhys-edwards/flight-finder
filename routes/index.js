@@ -69,8 +69,14 @@ router.get('/login', function(req, res, next) {
 })
 
 // Log in the user and authenticate
-router.post('/login', passport.authenticate('local'), function(req, res) {
-  res.redirect('/')
+router.post('/login', passport.authenticate('local'), function(username, password, err, done) {
+    //check if user is authenticated, in my case the user variable
+    if (err) { return done(err); }
+    if (!user) { return done(null, false); }
+    if (!user.authenticate(password)) { return done(null, false); }
+    if (!user.active) { return done(null, false); }
+    return done(null, user);
+    res.redirect('/')
 })
 
 // Logout the user
