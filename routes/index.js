@@ -1,11 +1,11 @@
 var express = require('express')
-const passport = require('passport')
-const UserSchema = require('../models/user.js')
+var passport = require('passport')
+var User = require('../models/user.js')
 var router = express.Router()
 
 // All the things to store data
-const mongodb = require('mongodb')
-const mongoose = require('mongoose')
+var mongodb = require('mongodb')
+var mongoose = require('mongoose')
 
 // The API call to flights
 var api = require('../api')
@@ -79,12 +79,9 @@ router.get('/login', function(req, res, next) {
 //     res.redirect('/')
 // })
 
-router.post('/login',
-  passport.authenticate('local', {
-    failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  res.redirect('/');
+});
 
 // Logout the user
 router.get('/logout', function(req, res, next) {

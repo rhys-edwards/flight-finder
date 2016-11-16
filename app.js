@@ -5,12 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-let UserSchema = require('./models/user.js')
 
 // User setup
-const mongoose = require('mongoose')
-var passport = require('passport')
-var LocalStrategy = require('passport-local').Strategy
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -74,31 +73,16 @@ app.use('/', routes);
 //     });
 //   }
 // ));
-
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password'
-},
-  function(username, password, cb) {
-     UserSchema.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
-    });
-  }));
+var User = require('./models/user.js')
+passport.use(new LocalStrategy(User.authenticate()));
 
 //passport.use(new LocalStrategy(UserSchema.authenticate()))
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
-});
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-passport.deserializeUser(function(id, cb) {
-  UserSchema.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
-});
+// Connect to Mongoose
+mongoose.connect('mongodb://localhost/users')
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

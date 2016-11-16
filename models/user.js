@@ -1,13 +1,10 @@
 // Import Mongoose and connect to the DB
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/users')
-const passportLocalMongoose = require('passport-local-mongoose')
-
-// Establish connection to the DB
-const db = mongoose.connection
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema,
+  passportLocalMongoose = require('passport-local-mongoose');
 
 // Define the scheme
-const UserSchema = mongoose.Schema ({
+var User = new Schema ({
   firstName: {
     type: String,
     index: true
@@ -30,23 +27,11 @@ const UserSchema = mongoose.Schema ({
   }
 })
 
-UserSchema.plugin(passportLocalMongoose)
+User.plugin(passportLocalMongoose, {
+  usernameField: 'email'
+})
 
-// Adding this function to find by username
-exports.findByUsername = function(username, cb) {
-  process.nextTick(function() {
-    for (var i = 0, len = records.length; i < len; i++) {
-      var record = records[i];
-      if (record.username === username) {
-        return cb(null, record);
-      }
-    }
-    return cb(null, null);
-  });
-}
-
-// Export it to the app
-module.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('User', User)
 
 // DONT FORGET THIS IS HALF DONE.
 // UID
