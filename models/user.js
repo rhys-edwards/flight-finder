@@ -17,19 +17,13 @@ var User = new Schema ({
     type: String,
     index: true
   },
-  password: {
-    type: String,
-    index: true
-  },
   homeAirport: {
     type: String,
     index: true
   }
 })
 
-User.plugin(passportLocalMongoose, {
-  usernameField: 'email'
-})
+User.plugin(passportLocalMongoose)
 
 module.exports = mongoose.model('User', User)
 

@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('cookie-session')
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
@@ -39,16 +40,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // Configure passport
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    //check if user is authenticated, in my case the user variable
-    if (err) { return done(err); }
-    if (!user) { return done(null, false); }
-    if (!user.authenticate(password)) { return done(null, false); }
-    if (!user.active) { return done(null, false); }
-    return done(null, user);
-  }
-));
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//     //check if user is authenticated, in my case the user variable
+//     if (err) { return done(err); }
+//     if (!user) { return done(null, false); }
+//     if (!user.authenticate(password)) { return done(null, false); }
+//     if (!user.active) { return done(null, false); }
+//     return done(null, user);
+//   }
+// ));
 
 // passport.use(new LocalStrategy({
 //   usernameField: 'email',
@@ -71,7 +72,7 @@ passport.use(new LocalStrategy(
 //   }
 // ));
 var User = require('./models/user.js')
-//passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 
 //passport.use(new LocalStrategy(UserSchema.authenticate()))
 // use static serialize and deserialize of model for passport session support
