@@ -8,5 +8,8 @@ block content
       br
       a(href='/register') Sign up
     if (user)
-      p We're logged in as #{user.username}
+      p The email address is #{user.username}
+      p My first name is #{user.firstName}
+      p My last name is #{user.lastName}
+      p I fly from #{user.homeAirport}
       a(href='/logout') Log out

@@ -17,8 +17,10 @@ Trying to build the best itinerary-builder
 * Return to the API (Or maybe do some front-end)
 ~~Get Mongo up and running~~
 ~~Get data into the DB~~
-* Return data to the client with a test
-* Bad requests at the moment.. debug this
+~~Return data to the client with a test~~
+~~Bad requests at the moment.. debug this~~
+* User login now works
+* Registration gets data in DB but times out
 
 
 
