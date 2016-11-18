@@ -13,15 +13,12 @@ var api = require('../api')
 /* GET home page. */
 // We send user data to the view
 router.get('/', function(req, res) {
-  res.render('index', {
-    user: req.user
-  })
-})
+  res.render('index', {user: req.user});
+});
 
-// Redirect people to sign up
 router.get('/register', function(req, res) {
-  res.render('register', {})
-})
+  res.render('register', {});
+});
 
 // Register a user to the DB
 router.post('/register', function(req, res, next){
@@ -31,7 +28,7 @@ router.post('/register', function(req, res, next){
   //let password = req.body.password
   let homeAirport = req.body.homeAirport
 
-  UserSchema.register(new UserSchema ({
+  User.register(new User ({
     firstName: firstName,
     lastName: lastName,
     username: username,
@@ -44,41 +41,19 @@ router.post('/register', function(req, res, next){
           user: user
         })
       }
-      // both of these works
+
       passport.authenticate('local', { failureRedirect: '/' }),
       function(req, res, next) {
         res.redirect('/');
       }
-
-      // passport.authenticate('local')(req, res, function() {
-      //   req.session.save(function (err) {
-      //     if (err) {
-      //       return next(err)
-      //     }
-      //   res.redirect('/')
-      //})
-    //})
   })
 })
 
-// Send to the login page
-router.get('/login', function(req, res, next) {
-  res.render('login', {
-    user: req.user
-  })
-})
+router.get('/login', function(req, res) {
+  res.render('login', {user: req.user});
+});
 
-// Log in the user and authenticate
-// router.post('/login', passport.authenticate('local'), function(username, password, err, done) {
-//     //check if user is authenticated, in my case the user variable
-//     if (err) { return done(err); }
-//     if (!user) { return done(null, false); }
-//     if (!user.authenticate(password)) { return done(null, false); }
-//     if (!user.active) { return done(null, false); }
-//     return done(null, user);
-//     res.redirect('/')
-// })
-
+//Post Login
 router.post('/login', passport.authenticate('local'), function(req, res) {
   res.redirect('/');
 });
@@ -103,37 +78,5 @@ router.get('/ping', function(req, res, next) {
 //     })
 //   })
 // })
-
-// Create a new user
-// router.post('/signup', function(req, res, next) {
-//
-//   // Get user information from the form
-//   let firstName = req.body.firstName
-//   let lastName = req.body.lastName
-//   let email = req.body.email
-//   let password = req.body.password
-//   let homeAirport = req.body.homeAirport
-//
-//   // This works
-//   console.log(firstName, lastName, email, password, homeAirport)
-//
-//   // Create new User object for DB, fuck it. We're using mongo.
-//   var data = new User ({
-//     firstName: firstName,
-//     lastName: lastName,
-//     email: email,
-//     password: password,
-//     homeAirport: homeAirport
-//   })
-//
-//   console.log(data)
-//
-//   // Store the new User into the DB
-//   User.createUser(data, function(err, user) {
-//     if (err) throw err
-//     console.log(user)
-//   })
-// })
-
 
 module.exports = router

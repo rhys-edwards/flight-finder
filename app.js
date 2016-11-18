@@ -7,8 +7,10 @@ var session = require('cookie-session')
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
+
 // User setup
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -39,39 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-// Configure passport
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     //check if user is authenticated, in my case the user variable
-//     if (err) { return done(err); }
-//     if (!user) { return done(null, false); }
-//     if (!user.authenticate(password)) { return done(null, false); }
-//     if (!user.active) { return done(null, false); }
-//     return done(null, user);
-//   }
-// ));
-
-// passport.use(new LocalStrategy({
-//   usernameField: 'email',
-//   passwordField: 'password'
-// },
-//   function(username, password, done) {
-//     UserSchema.findOne({ username: username }, function(err, user) {
-//       if (err) { return done(err); }
-//       if (!user) {
-//         console.log('you fucked up the username')
-//         return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (user.password != password) {
-//         console.log('you fucked up')
-//         return done(null, false, { message: 'Invalid password' });
-//       }
-//
-//       return done(null, user);
-//     });
-//   }
-// ));
 var User = require('./models/user.js')
+
 passport.use(new LocalStrategy(User.authenticate()));
 
 //passport.use(new LocalStrategy(UserSchema.authenticate()))
