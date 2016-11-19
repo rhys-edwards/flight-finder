@@ -24,7 +24,7 @@ router.get('/register', function(req, res) {
 router.post('/register', function(req, res, next){
   let firstName = req.body.firstName
   let lastName = req.body.lastName
-  let username = req.body.email
+  let username = req.body.username
   //let password = req.body.password
   let homeAirport = req.body.homeAirport
 
@@ -41,9 +41,7 @@ router.post('/register', function(req, res, next){
           user: user
         })
       }
-
-      passport.authenticate('local', { failureRedirect: '/' }),
-      function(req, res, next) {
+      passport.authenticate('local'), function(req, res) {
         res.redirect('/');
       }
   })
