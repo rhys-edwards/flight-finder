@@ -34,18 +34,21 @@ router.post('/register', function(req, res, next){
     username: username,
     homeAirport: homeAirport
   }),
-    req.body.password, function(err, user) {
-      if (err) {
-        console.log(err)
-        return res.render('register', {
-          user: user
-        })
-      }
-      passport.authenticate('local'), function(req, res) {
-        res.redirect('/');
-      }
+  req.body.password, function(err, user) {
+    if (err) {
+      console.log(err)
+      return res.render('register', {
+        user: user
+      })
+    }
+    else {
+      passport.authenticate('local')(req, res, function () {
+          res.redirect('/');
+      })
+    }
   })
 })
+
 
 router.get('/login', function(req, res) {
   res.render('login', {user: req.user});
