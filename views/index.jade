@@ -8,6 +8,7 @@ block content
       br
       a(href='/register') Sign up
     if (user)
+      include addDestinations.jade
       p The email address is #{user.username}
       p My first name is #{user.firstName}
       p My last name is #{user.lastName}

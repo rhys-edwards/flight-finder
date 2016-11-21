@@ -70,6 +70,23 @@ router.get('/ping', function(req, res, next) {
   res.status(200).send("pong")
 })
 
+// Add a destination to the DB
+router.post('/add', function(req, res, next) {
+  let airport = req.body.destination
+  let month = req.body.month
+  console.log(User.id)
+  User.findById(id , function (err, User) {
+    if (err) return handleError(err)
+
+    User.destinations.airport = airport
+    User.destinations.month = month
+    User.save(callback)
+    res.status(200).send('added')
+  })
+
+  console.log(airport)
+})
+
 // Hit the API
 // We need to work out how this will work with real data
 // router.get('/', function(req, res, next) {

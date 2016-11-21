@@ -3,6 +3,11 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   passportLocalMongoose = require('passport-local-mongoose');
 
+var destinationSchema = new Schema({
+  airport: String,
+  month: String
+})
+
 // Define the scheme
 var User = new Schema ({
   firstName: {
@@ -20,8 +25,10 @@ var User = new Schema ({
   homeAirport: {
     type: String,
     index: true
-  }
+  },
+  destinations: destinationSchema
 })
+
 
 User.plugin(passportLocalMongoose)
 

@@ -3,6 +3,7 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* Work out how to use findById and where to store the id
 * Store session so the user doesn't need to log in
 * Add new collection to user object for destinations
 * Use Cities and Airports JSON data - search it
