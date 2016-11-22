@@ -70,6 +70,9 @@ router.get('/ping', function(req, res, next) {
   res.status(200).send("pong")
 })
 
+
+// LAZY
+
 // Add a destination to the DB
 router.post('/add', function(req, res, next) {
   let airport = req.body.destination
