@@ -3,14 +3,18 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* Use websockets to query and return data on the front end
+* Capture city name, turn into airport IATA code on the server
+* Update destination model schema 
 * Work out how to use findById and where to store the id
 * Store session so the user doesn't need to log in
-* Add new collection to user object for destinations
 * Use Cities and Airports JSON data - search it
 * Return to the API (Or maybe do some front-end)
 
 ## Completed
 
+* ~~Add new collection to user object for destinations~~
+* ~~Work out how to use findById and where to store the id~~
 * ~~Download xcode cli tools (at home)~~
 * ~~Add hometown to form~~
 * ~~Add password to form~~

@@ -26,7 +26,7 @@ var User = new Schema ({
     type: String,
     index: true
   },
-  destinations: destinationSchema
+  destinations: [destinationSchema]
 })
 
 

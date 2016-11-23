@@ -72,20 +72,26 @@ router.get('/ping', function(req, res, next) {
 
 // Add a destination to the DB
 router.post('/add', function(req, res, next) {
-  let airport = req.body.destination
-  let month = req.body.month
   let id = (req.user.id)
 
-  User.findById(id , function (err, User) {
+  User.findById(id , function (err, user) {
     if (err) return handleError(err)
 
-    destinations.airport = airport
-    destinations.month = month
-    User.save(callback)
-    res.status(200).send('added')
-  })
+    user.destinations.push({
+      airport: req.body.destination,
+      month: req.body.month
+    })
 
-  console.log(airport)
+    var subdoc = user.destinations[0]
+    subdoc.isNew
+
+    user.save(function (err) {
+      if (err) return handleError (err)
+      console.log('fuck yeah')
+    })
+
+    res.sendStatus(200)
+  })
 })
 
 // Hit the API
