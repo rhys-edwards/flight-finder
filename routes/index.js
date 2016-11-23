@@ -70,19 +70,17 @@ router.get('/ping', function(req, res, next) {
   res.status(200).send("pong")
 })
 
-
-// LAZY
-
 // Add a destination to the DB
 router.post('/add', function(req, res, next) {
   let airport = req.body.destination
   let month = req.body.month
-  console.log(User.id)
+  let id = (req.user.id)
+
   User.findById(id , function (err, User) {
     if (err) return handleError(err)
 
-    User.destinations.airport = airport
-    User.destinations.month = month
+    destinations.airport = airport
+    destinations.month = month
     User.save(callback)
     res.status(200).send('added')
   })
