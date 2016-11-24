@@ -3,9 +3,8 @@
 Trying to build the best itinerary-builder
 
 ## To do
-* Use websockets to query and return data on the front end
 * Capture city name, turn into airport IATA code on the server
-* Update destination model schema 
+* Update destination model schema
 * Work out how to use findById and where to store the id
 * Store session so the user doesn't need to log in
 * Use Cities and Airports JSON data - search it

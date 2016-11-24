@@ -90,7 +90,7 @@ router.post('/add', function(req, res, next) {
       console.log('fuck yeah')
     })
 
-    res.sendStatus(200)
+    res.redirect('/')
   })
 })
 
