@@ -13,7 +13,9 @@ block content
       p My first name is #{user.firstName}
       p My last name is #{user.lastName}
       p I fly from #{user.homeAirport}
-      p I wanna go to #{user.destinations.aiport}
+      each dest in user.destinations
+        li= dest.airport
+        li= dest.month
       a(href='/logout') Log out
       div
         - console.log(user)
