@@ -1,6 +1,7 @@
 var express = require('express')
 var passport = require('passport')
 var User = require('../models/user.js')
+var airports = require('airport-codes')
 var router = express.Router()
 
 // All the things to store data
@@ -27,6 +28,9 @@ router.post('/register', function(req, res, next){
   let username = req.body.username
   //let password = req.body.password
   let homeAirport = req.body.homeAirport
+
+  console.log(airports.findWhere({ name: homeAirport }).get('iata'));
+//=> Los Angeles Intl
 
   User.register(new User ({
     firstName: firstName,

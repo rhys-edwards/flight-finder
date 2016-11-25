@@ -31,8 +31,7 @@ app.use(cookieParser());
 // Sessions and Passport init
 app.use(require('express-session')({
   secret: "keyboard cate",
-  resave: false,
-  saveUninitialized: false
+  cookie: {maxAge: 60000}
 }))
 app.use(passport.initialize())
 app.use(passport.session())
