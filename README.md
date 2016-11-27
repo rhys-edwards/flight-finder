@@ -3,6 +3,8 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* Add autocomplete to homeAirports on sign up
+* Use airport name to find IATA code when pushing data
 * Capture city name, turn into airport IATA code on the server
 * Update destination model schema
 * Use Cities and Airports JSON data - search it

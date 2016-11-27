@@ -16217,29 +16217,34 @@ $(function(){
   {"id":"9541","name":"San Diego Old Town Transit Center","city":"San Diego","country":"United States","iata":"OLT","icao":"\\N","latitude":"32.7552","longitude":"-117.1995","altitude":"0","timezone":"-8","dst":"A","tz":"America/Los_Angeles"}
   ]
 
-    $('#autocomplete').autocomplete({
-        minLength: 1,
-        source: suggestion,
-        focus: function(event, ui) {
-	                $('#autocomplete').val(ui.item.name);
-	                return false;
-	            },
+  $('#autocomplete').autocomplete({
+  minLength: 1,
+  source: function(request, response) {
+          var data = $.grep(suggestion, function(value) {
+              return value.city.substring(0, request.term.length).toLowerCase() == request.term.toLowerCase();
+          });
 
-        select: function(event, ui) {
+          response(data);
+  },
+  focus: function(event, ui) {
+              $('#autocomplete').val(ui.item.city,ui.item.country);
+              return false;
+          },
 
-            $('#autocomplete').val(ui.item.name);
+  select: function(event, ui) {
 
-	                return false;
-	            }
-            })
+      $('#autocomplete').val(ui.item.name);
 
-            .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+              return false;
+          }
+      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 
-		            return $( "<li></li>" )
-		                .data( "ui-autocomplete-item", item )
+              return $( "<li></li>" )
+                  .data( "ui-autocomplete-item", item )
 
-		                .append( "<a>" + item.name + "</a>" )
-		                .appendTo( ul );
-		        };
+                  .append( "<a>" + item.city + "," + item.country + "</a>" )
 
-          })
+                  .appendTo( ul );
+          };
+
+    });
