@@ -3,6 +3,8 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* More airport data to external JSON file
+* Update source in autocomplete.js to reflect new location
 * Add autocomplete to homeAirports on sign up
 * Use airport name to find IATA code when pushing data
 * Capture city name, turn into airport IATA code on the server
