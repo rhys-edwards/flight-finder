@@ -3,6 +3,9 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* Turn destination into relative IATA codes on homeAirport and addDestination
+* Run through destination's IATA codes for each user and hit api for results
+* Use captured month data to request against date range for the month
 * More airport data to external JSON file
 * Update source in autocomplete.js to reflect new location
 * Add autocomplete to homeAirports on sign up
