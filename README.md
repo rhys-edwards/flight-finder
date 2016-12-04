@@ -3,6 +3,7 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* BREAK
 * Not good
 * Again
 * Turn destination into relative IATA codes on homeAirport and addDestination
