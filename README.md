@@ -8,6 +8,7 @@ Trying to build the best itinerary-builder
 * Not good
 * Again
 * Break
+* Do an hour
 * Turn destination into relative IATA codes on homeAirport and addDestination
 * Run through destination's IATA codes for each user and hit api for results
 * Use captured month data to request against date range for the month
