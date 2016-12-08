@@ -16218,33 +16218,23 @@ $(function(){
   ]
 
   $('#autocomplete').autocomplete({
-  minLength: 1,
-  source: function(request, response) {
-          var data = $.grep(suggestion, function(value) {
-              return value.city.substring(0, request.term.length).toLowerCase() == request.term.toLowerCase();
-          });
+      minLength: 1,
+      source: function(request, response) {
+              var data = $.grep(suggestion, function(value) {
+                  return value.city.substring(0, request.term.length).toLowerCase() == request.term.toLowerCase(); // Here the suggestion array is filtered based on what the user has typed. User input will be captured in the request.term
+              });
 
-          response(data);
-  },
-  focus: function(event, ui) {
-              $('#autocomplete').val(ui.item.city,ui.item.country);
-              return false;
-          },
+              response(data); // this will return the filtered data which will be attached with the input box.
+      }
 
-  select: function(event, ui) {
+     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 
-      $('#autocomplete').val(ui.item.name);
+                  return $( "<li></li>" )
+                      .data( "ui-autocomplete-item", item )
 
-              return false;
-          }
-      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                      .append( "<a>" + item.city + "," + item.country + "</a>" )
 
-              return $( "<li></li>" )
-                  .data( "ui-autocomplete-item", item )
-
-                  .append( "<a>" + item.city + "," + item.country + "</a>" )
-
-                  .appendTo( ul );
-          };
+                      .appendTo( ul ); // here we are creating and appending appending element based on the response object we got after filtering
+              };
 
     });
