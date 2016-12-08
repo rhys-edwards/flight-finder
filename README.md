@@ -3,6 +3,7 @@
 Trying to build the best itinerary-builder
 
 ## To do
+* Get autocomplete to fill textField on select
 * Turn destination into relative IATA codes on homeAirport and addDestination
 * Run through destination's IATA codes for each user and hit api for results
 * Use captured month data to request against date range for the month
