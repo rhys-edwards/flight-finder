@@ -16219,6 +16219,11 @@ $(function(){
 
   $('#autocomplete').autocomplete({
       minLength: 1,
+      select: function( event, ui ) {
+        event.preventDefault();
+        $('#autocomplete').val(ui.item.name)
+        return false;
+      },
       source: function(request, response) {
               var data = $.grep(suggestion, function(value) {
                   return value.city.substring(0, request.term.length).toLowerCase() == request.term.toLowerCase(); // Here the suggestion array is filtered based on what the user has typed. User input will be captured in the request.term
@@ -16231,9 +16236,7 @@ $(function(){
 
                   return $( "<li></li>" )
                       .data( "ui-autocomplete-item", item )
-
                       .append( "<a>" + item.city + "," + item.country + "</a>" )
-
                       .appendTo( ul ); // here we are creating and appending appending element based on the response object we got after filtering
               };
 
