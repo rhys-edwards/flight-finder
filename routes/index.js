@@ -1,8 +1,12 @@
 var express = require('express')
 var passport = require('passport')
+var _ = require('lodash')
+var jsonfile = require('jsonfile')
+var file = './models/airports.json'
 var User = require('../models/user.js')
 var airports = require('airport-codes')
 var router = express.Router()
+
 
 // All the things to store data
 var mongodb = require('mongodb')
@@ -81,6 +85,43 @@ router.post('/add', function(req, res, next) {
   User.findById(id , function (err, user) {
     if (err) return handleError(err)
 
+    //////////////////////////////////////////////
+
+    let location = req.body.destination
+    console.log(location)
+    // WORKING.. Sort of
+    // Read airports.json
+    // jsonfile.readFile(file, function(err, obj) {
+    //   console.log('1.' + ' ' + location)
+    //
+    //   var iataCode = _.result(_.find(obj, function (obj1) {
+    //     return obj1.name === location
+    //   }), 'iata')
+    //   console.log('2.' + ' ' + iataCode)
+    // })
+
+    //////////////////////////////////////////////
+
+    // CURRENTLY NOT WORKING
+    var newCode = function getIATA (location) {
+
+      jsonfile.readFile(file, function(err, obj) {
+        // This works
+        console.log('1.' + ' ' + location)
+
+        var iataCode = _.result(_.find(obj, function (obj1) {
+          return obj1.name === location
+        }), 'iata')
+        // This works as well
+        console.log('2.' + ' ' + iataCode)
+      })
+    }
+
+    // This does not
+    newCode(location);
+    console.log('3.' + ' ' + newCode)
+
+    //////////////////////////////////////////////
     user.destinations.push({
       airport: req.body.destination,
       month: req.body.month
@@ -91,7 +132,6 @@ router.post('/add', function(req, res, next) {
 
     user.save(function (err) {
       if (err) return handleError (err)
-      console.log('fuck yeah')
     })
 
     res.redirect('/')

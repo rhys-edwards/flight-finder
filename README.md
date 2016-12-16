@@ -3,21 +3,24 @@
 Trying to build the best itinerary-builder
 
 ## To do
-* Get autocomplete to fill textField on select
-* Turn destination into relative IATA codes on homeAirport and addDestination
+* Make IATA function asynchronous to return results. See StackOverflow
+* Filter through JSON to Cross-reference cities with local Airports
+* Store the location in the DB with IATA codes as subdocs
+* Turn destination into relative IATA codes on homeAirport
 * Run through destination's IATA codes for each user and hit api for results
 * Use captured month data to request against date range for the month
-* More airport data to external JSON file
+* Move airport data to external JSON file for autocomplete
 * Update source in autocomplete.js to reflect new location
-* Add autocomplete to homeAirports on sign up
-* Use airport name to find IATA code when pushing data
-* Capture city name, turn into airport IATA code on the server
-* Update destination model schema
 * Use Cities and Airports JSON data - search it
 * Return to the API (Or maybe do some front-end)
 
 ## Completed
-
+* ~~Use airport name to find IATA code when pushing data~~
+* ~~Capture city name, turn into airport IATA code on the server~~
+* ~~Update destination model schema~~
+* ~~Add autocomplete to homeAirports on sign up~~
+* ~~Get autocomplete to fill textField on select~~
+* ~~Get the location the user wants to travel to~~
 * ~~Work out how to use findById and where to store the id~~
 * ~~Store session so the user doesn't need to log in~~
 * ~~Add new collection to user object for destinations~~
@@ -39,5 +42,5 @@ Trying to build the best itinerary-builder
 * ~~On registration is redirecting to index page. This should redirect as logged in user~~
 
 ## Notes
-~~User isn't defined as we haven't made the model schema and required it in index.js~~
-* We will still need to work out how to grab destinations and add them to the db
+* ~~User isn't defined as we haven't made the model schema and required it in index.js~~
+* ~~We will still need to work out how to grab destinations and add them to the db~~

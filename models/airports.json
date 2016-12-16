@@ -1,4 +1,3 @@
-var suggestion =
   [
   {"id":"1","name":"Goroka","city":"Goroka","country":"Papua New Guinea","iata":"GKA","icao":"AYGA","latitude":"-6.081689","longitude":"145.391881","altitude":"5282","timezone":"10","dst":"U","tz":"Pacific/Port_Moresby"}
   ,
