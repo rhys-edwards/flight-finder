@@ -82,59 +82,49 @@ router.get('/ping', function(req, res, next) {
 router.post('/add', function(req, res, next) {
   let id = (req.user.id)
 
+  // Find our logged in user
   User.findById(id , function (err, user) {
     if (err) return handleError(err)
 
-    //////////////////////////////////////////////
-
+    // Grab the location from the form
     let location = req.body.destination
-    console.log(location)
-    // WORKING.. Sort of
-    // Read airports.json
-    // jsonfile.readFile(file, function(err, obj) {
-    //   console.log('1.' + ' ' + location)
-    //
-    //   var iataCode = _.result(_.find(obj, function (obj1) {
-    //     return obj1.name === location
-    //   }), 'iata')
-    //   console.log('2.' + ' ' + iataCode)
-    // })
 
-    //////////////////////////////////////////////
+    // We need to run through the JSON store with async. Use a promise.
+    var getIATA = new Promise(function(resolve, reject) {
 
-    // CURRENTLY NOT WORKING
-    var newCode = function getIATA (location) {
-
+      // Read the JSON file, use lodash's find method to match the location against an IATA code
       jsonfile.readFile(file, function(err, obj) {
-        // This works
-        console.log('1.' + ' ' + location)
-
         var iataCode = _.result(_.find(obj, function (obj1) {
           return obj1.name === location
         }), 'iata')
-        // This works as well
-        console.log('2.' + ' ' + iataCode)
+
+        // Resolve the promise.
+        // Add some sort of error handling later
+        resolve(iataCode)
+
       })
-    }
-
-    // This does not
-    newCode(location);
-    console.log('3.' + ' ' + newCode)
-
-    //////////////////////////////////////////////
-    user.destinations.push({
-      airport: req.body.destination,
-      month: req.body.month
     })
 
-    var subdoc = user.destinations[0]
-    subdoc.isNew
+    // Call the promise to get the IATA code ready
+    getIATA.then(function(fromResolve) {
+      console.log('hi hi hi' +fromResolve)
 
-    user.save(function (err) {
-      if (err) return handleError (err)
+      // Push the new data into the DB
+      user.destinations.push({
+        airport: fromResolve,
+        month: req.body.month
+      })
+
+      var subdoc = user.destinations[0]
+      subdoc.isNew
+
+      user.save(function (err) {
+        if (err) return handleError (err)
+      })
     })
 
     res.redirect('/')
+
   })
 })
 

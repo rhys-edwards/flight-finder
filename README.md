@@ -3,10 +3,7 @@
 Trying to build the best itinerary-builder
 
 ## To do
-* Make IATA function asynchronous to return results. See StackOverflow
-* Filter through JSON to Cross-reference cities with local Airports
-* Store the location in the DB with IATA codes as subdocs
-* Turn destination into relative IATA codes on homeAirport
+* Turn destination into relative IATA codes on sign up
 * Run through destination's IATA codes for each user and hit api for results
 * Use captured month data to request against date range for the month
 * Move airport data to external JSON file for autocomplete
@@ -15,6 +12,9 @@ Trying to build the best itinerary-builder
 * Return to the API (Or maybe do some front-end)
 
 ## Completed
+* ~~Make IATA function asynchronous to return results. See StackOverflow~~
+* ~~Filter through JSON to Cross-reference cities with local Airports~~
+* ~~Store the location in the DB with IATA codes as subdocs~~
 * ~~Use airport name to find IATA code when pushing data~~
 * ~~Capture city name, turn into airport IATA code on the server~~
 * ~~Update destination model schema~~
