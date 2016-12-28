@@ -1,6 +1,21 @@
 form(method='post', action='/add', class='form')
   .form-group
+    p Where do you want to go?
     input.form-control(type='text', name='destination' id='autocomplete')
   .form-group
-    input.form-control(type='text', name='month')
+    p For how many days?
+    input.form-control(type='number', name='daysAway')
+  .form-group
+    p When do you want to go?
+    input.form-control(type='month', name='month')
+  .form-group
+    p What day do you want to leave?
+    select
+      option Monday
+      option Tuesday
+      option Wednesday
+      option Thursday
+      option Friday
+      option Saturday
+      option Sunday
   button.btn.btn-default(type='submit') Add Destination

@@ -3,15 +3,17 @@
 Trying to build the best itinerary-builder
 
 ## To do
-* Turn destination into relative IATA codes on sign up
+* Add length of trip, leaving day and month to addDestination
+* Find the departure dates with the leaving day for the month
+* Use length of trip to work out the return dates
+* Build query
 * Run through destination's IATA codes for each user and hit api for results
-* Use captured month data to request against date range for the month
+* Use month data to request against date range for the month
 * Move airport data to external JSON file for autocomplete
-* Update source in autocomplete.js to reflect new location
-* Use Cities and Airports JSON data - search it
 * Return to the API (Or maybe do some front-end)
 
 ## Completed
+* ~~Turn destination into relative IATA codes on sign up~~
 * ~~Make IATA function asynchronous to return results. See StackOverflow~~
 * ~~Filter through JSON to Cross-reference cities with local Airports~~
 * ~~Store the location in the DB with IATA codes as subdocs~~

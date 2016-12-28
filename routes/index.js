@@ -30,33 +30,48 @@ router.post('/register', function(req, res, next){
   let firstName = req.body.firstName
   let lastName = req.body.lastName
   let username = req.body.username
-  //let password = req.body.password
   let homeAirport = req.body.homeAirport
 
-  console.log(airports.findWhere({ name: homeAirport }).get('iata'));
-//=> Los Angeles Intl
+  // We need to run through the JSON store with async. Use a promise.
+  var getIATA = new Promise(function(resolve, reject) {
 
-  User.register(new User ({
-    firstName: firstName,
-    lastName: lastName,
-    username: username,
-    homeAirport: homeAirport
-  }),
-  req.body.password, function(err, user) {
-    if (err) {
-      console.log(err)
-      return res.render('register', {
-        user: user
-      })
-    }
-    else {
-      passport.authenticate('local')(req, res, function () {
-          res.redirect('/');
-      })
-    }
+    // Read the JSON file, use lodash's find method to match the location against an IATA code
+    jsonfile.readFile(file, function(err, obj) {
+      var iataCode = _.result(_.find(obj, function (obj1) {
+        return obj1.name === homeAirport
+      }), 'iata')
+
+      // Resolve the promise.
+      // Add some sort of error handling later
+      resolve(iataCode)
+
+    })
+  })
+
+  // Call the promise to get the IATA code ready
+  getIATA.then(function(fromResolve) {
+
+    User.register(new User ({
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      homeAirport: fromResolve
+    }),
+    req.body.password, function(err, user) {
+      if (err) {
+        console.log(err)
+        return res.render('register', {
+          user: user
+        })
+      }
+      else {
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        })
+      }
+    })
   })
 })
-
 
 router.get('/login', function(req, res) {
   res.render('login', {user: req.user});
@@ -112,6 +127,7 @@ router.post('/add', function(req, res, next) {
       // Push the new data into the DB
       user.destinations.push({
         airport: fromResolve,
+        daysAway: req.body.daysAway
         month: req.body.month
       })
 
