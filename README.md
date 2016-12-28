@@ -3,7 +3,7 @@
 Trying to build the best itinerary-builder
 
 ## To do
-* Add length of trip, leaving day and month to addDestination
+* Delete trips
 * Find the departure dates with the leaving day for the month
 * Use length of trip to work out the return dates
 * Build query
@@ -13,6 +13,7 @@ Trying to build the best itinerary-builder
 * Return to the API (Or maybe do some front-end)
 
 ## Completed
+* ~~Add length of trip, leaving day and month to addDestination~~
 * ~~Turn destination into relative IATA codes on sign up~~
 * ~~Make IATA function asynchronous to return results. See StackOverflow~~
 * ~~Filter through JSON to Cross-reference cities with local Airports~~

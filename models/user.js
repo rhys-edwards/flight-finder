@@ -5,7 +5,9 @@ var mongoose = require('mongoose'),
 
 var destinationSchema = new Schema({
   airport: String,
-  month: String
+  daysAway: Number,
+  month: String,
+  day: String
 })
 
 // Define the scheme

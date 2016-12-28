@@ -15,6 +15,8 @@ block content
       p I fly from #{user.homeAirport}
       each dest in user.destinations
         li= dest.airport
+        li= dest.daysAway 
+        li= dest.day
         li= dest.month
       a(href='/logout') Log out
       div

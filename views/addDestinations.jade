@@ -10,12 +10,12 @@ form(method='post', action='/add', class='form')
     input.form-control(type='month', name='month')
   .form-group
     p What day do you want to leave?
-    select
-      option Monday
-      option Tuesday
-      option Wednesday
-      option Thursday
-      option Friday
-      option Saturday
-      option Sunday
+    select.day(name='day')
+      option(value='Monday') Monday
+      option(value='Tuesday') Tuesday
+      option(value='Wednesday') Wednesday
+      option(value='Thursday') Thursday
+      option(value='Friday') Friday
+      option(value='Saturday') Saturday
+      option(value='Sunday') Sunday
   button.btn.btn-default(type='submit') Add Destination

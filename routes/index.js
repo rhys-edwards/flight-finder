@@ -122,13 +122,13 @@ router.post('/add', function(req, res, next) {
 
     // Call the promise to get the IATA code ready
     getIATA.then(function(fromResolve) {
-      console.log('hi hi hi' +fromResolve)
-
+      console.log(req.body.day)
       // Push the new data into the DB
       user.destinations.push({
         airport: fromResolve,
-        daysAway: req.body.daysAway
-        month: req.body.month
+        daysAway: req.body.daysAway,
+        month: req.body.month,
+        day: req.body.day
       })
 
       var subdoc = user.destinations[0]
