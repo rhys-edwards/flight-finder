@@ -1,8 +1,49 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #fff1e0
 }
 
 a {
   color: #00B7FF;
+}
+
+.destinationBox {
+    display: block;
+    border-color: #505050;
+    border-style: solid;
+    border-width: thin;
+    padding: 10px 10px 130px 10px;
+}
+
+.where {
+  width: 45%;
+  float: left;
+  border-bottom: #505050 solid thin;
+}
+
+.howLong {
+  width: 45%;
+  float: left;
+  border-bottom: #505050 solid thin;
+  margin-left: 20px;
+}
+
+.whatDay {
+  width: 45%;
+  float: left;
+}
+
+.whatMonth {
+  width: 45%;
+  float: left;
+  margin-left: 20px;
+}
+
+.row2 {
+  width: 100%;
+}
+
+p.label {
+  font-size: 8px
 }

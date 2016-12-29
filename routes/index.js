@@ -88,11 +88,6 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/')
 })
 
-// Test the connection
-router.get('/ping', function(req, res, next) {
-  res.status(200).send("pong")
-})
-
 // Add a destination to the DB
 router.post('/add', function(req, res, next) {
   let id = (req.user.id)
@@ -122,7 +117,7 @@ router.post('/add', function(req, res, next) {
 
     // Call the promise to get the IATA code ready
     getIATA.then(function(fromResolve) {
-      console.log(req.body.day)
+
       // Push the new data into the DB
       user.destinations.push({
         airport: fromResolve,
@@ -159,4 +154,15 @@ router.get('/delete/:id', function(req, res, next) {
       }
     )
 });
+
+// Hit the API
+// We need to work out how this will work with real data
+// router.get('/', function(req, res, next) {
+//   api.apiGet(function (data) {
+//     res.render('index', {
+//       data: data
+//     })
+//   })
+// })
+
 module.exports = router

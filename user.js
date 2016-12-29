@@ -10,7 +10,7 @@ let User = require('./models/user.model')
 // }
 
 User.find().sort({ firstName: 1})
-console.log(User)
+console.log('hello' + ' ' + User)
 var apiCaller = function (cb) {
   const options = {
     method: 'POST',

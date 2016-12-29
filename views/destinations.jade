@@ -1,0 +1,17 @@
+each dest in user.destinations
+  .destinationBox
+    .row2
+      .where
+        p.label Where are you going?
+        p= dest.airport
+      .howLong
+        p.label How long are you going for?
+        p= dest.daysAway 
+    .row2
+      .whatDay
+        p.label What day do you want to leave?
+        p= dest.day
+      .whatMonth
+        p.label What month do you want to go?
+        p= dest.month
+    a(href='/delete/'+dest._id) Delete this entry

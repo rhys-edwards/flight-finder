@@ -1,27 +1,21 @@
 extends layout
 
 block content
-  .container
+  .row
     h1 A Year of Travel
+  .row
     if (!user)
       a(href="/login") login
       br
       a(href='/register') Sign up
     if (user)
-      include addDestinations.jade
-      p The email address is #{user.username}
-      p My first name is #{user.firstName}
-      p My last name is #{user.lastName}
-      p I fly from #{user.homeAirport}
-      each dest in user.destinations
-        .destination
-          li= dest.airport
-          li= dest.daysAway 
-          li= dest.day
-          li= dest.month
-          a(href='/delete/'+dest._id) Delete this entry
-      a(href='/logout') Log out
-      div
-        - console.log(user)
-      div
+      .col-md-6
+        include addDestinations.jade
+        include userDetails.jade
+      .col-md-6
+        include destinations.jade
+        a(href='/logout') Log out
+        div
+          - console.log(user)
+        div
       
