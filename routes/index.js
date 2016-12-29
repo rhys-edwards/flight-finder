@@ -159,38 +159,4 @@ router.get('/delete/:id', function(req, res, next) {
       }
     )
 });
-  // user.destinations.pull(id)
-  // user.save(function (err) {
-  //   if (err) return handleError (err)
-  //})
-  // NOT WORKING
-  // User.findById(id , function (err, user) {
-  //   if (err) return handleError(err)
-  //
-  //   var id = req.params.id;
-  //   console.log(id)
-  //
-  //   User.findOne({'User.destinations._id': id}, function (err, result) {
-  //       result.user.destinations.id(id).remove();
-  //       result.save();
-  //   });
-  // })
-
-  // NOT WORKING
-  // var subdoc = User.destinations.id(id).remove()
-  // user.save(function (err) {
-  //   if (err) return handleError (err)
-  // })
-  //})
-
-// Hit the API
-// We need to work out how this will work with real data
-// router.get('/', function(req, res, next) {
-//   api.apiGet(function (data) {
-//     res.render('index', {
-//       data: data
-//     })
-//   })
-// })
-
 module.exports = router
