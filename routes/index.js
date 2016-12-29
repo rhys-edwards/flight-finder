@@ -144,6 +144,45 @@ router.post('/add', function(req, res, next) {
   })
 })
 
+// Remove a destination from the user
+router.get('/delete/:id', function(req, res, next) {
+  User.update(
+    { "_id": req.user.id },
+    { "$pull": { "destinations": { "_id": req.params.id } } },
+      function(err, numAffected) {
+        if(err){
+            console.log(err)
+        } else {
+            res.status(200).send()
+            res.redirect('/')
+        }
+      }
+    )
+});
+  // user.destinations.pull(id)
+  // user.save(function (err) {
+  //   if (err) return handleError (err)
+  //})
+  // NOT WORKING
+  // User.findById(id , function (err, user) {
+  //   if (err) return handleError(err)
+  //
+  //   var id = req.params.id;
+  //   console.log(id)
+  //
+  //   User.findOne({'User.destinations._id': id}, function (err, result) {
+  //       result.user.destinations.id(id).remove();
+  //       result.save();
+  //   });
+  // })
+
+  // NOT WORKING
+  // var subdoc = User.destinations.id(id).remove()
+  // user.save(function (err) {
+  //   if (err) return handleError (err)
+  // })
+  //})
+
 // Hit the API
 // We need to work out how this will work with real data
 // router.get('/', function(req, res, next) {

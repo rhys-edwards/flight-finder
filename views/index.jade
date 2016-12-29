@@ -14,10 +14,12 @@ block content
       p My last name is #{user.lastName}
       p I fly from #{user.homeAirport}
       each dest in user.destinations
-        li= dest.airport
-        li= dest.daysAway 
-        li= dest.day
-        li= dest.month
+        .destination
+          li= dest.airport
+          li= dest.daysAway 
+          li= dest.day
+          li= dest.month
+          a(href='/delete/'+dest._id) Delete this entry
       a(href='/logout') Log out
       div
         - console.log(user)
